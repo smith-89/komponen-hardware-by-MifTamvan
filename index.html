@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>komponen hardware komputer BY:MifTamvan </title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #0056a3 0%, #003f7a 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: -80px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .toggle-btn {
+            background: linear-gradient(to right, #0056a3, #0077cc);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 30px auto;
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 86, 163, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .toggle-btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #0077cc, #0056a3);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .toggle-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 86, 163, 0.4);
+        }
+        
+        .toggle-btn:hover::after {
+            opacity: 1;
+        }
+        
+        #about {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            display: none;
+            transition: all 0.5s ease;
+            border-left: 5px solid #0056a3;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .profile-img {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .rounded-image {
+            border-radius: 50%;
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0, 86, 163, 0.3);
+            border: 5px solid #e9f7ff;
+            transition: transform 0.3s ease;
+        }
+        
+        .rounded-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .about-text {
+            flex: 2;
+            min-width: 300px;
+        }
+        
+        .about-text h3 {
+            color: #0056a3;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9f7ff;
+        }
+        
+        .about-text ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .about-text li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+            font-size: 1.1rem;
+        }
+        
+        .about-text li::before {
+            content: "•";
+            color: #0056a3;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+        
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .component-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #eaeaea;
+        }
+        
+        .component-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 86, 163, 0.2);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, #0056a3 0%, #0077cc 100%);
+            color: white;
+            padding: 20px;
+        }
+        
+        .card-header h2 {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .card-body p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #444;
+        }
+        
+        .component-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, #003f7a 0%, #00264d 100%);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+            font-size: 1.1rem;
+        }
+        
+        footer p {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .about-text li {
+                padding-left: 0;
+                text-align: left;
+            }
+            
+            .about-text li::before {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .components-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Komponen Hardware Komputer</h1>
+            <p class="subtitle">Tugas Informatika - Mengenal Perangkat Keras Komputer</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <button class="toggle-btn" onclick="toggleAbout()">Lihat Tentang Mahasiswa</button>
+
+        <div id="about">
+            <div class="about-content">
+                <div class="profile-img">
+                    <img src="https://files.catbox.moe/jjwd4e.jpg" 
+                         alt="Foto Mahasiswa" class="rounded-image">
+                </div>
+                <div class="about-text">
+                    <h3>Tentang Mahasiswa</h3>
+                    
+                    <ul>
+                        <li><strong>Nama Mahasiswa :</strong> Miftah Fauzan</li>
+
+                        <li><strong>Kelas:</strong> 11 MIPA 2</li>
+                        <li><strong>Sekolah:</strong>SMA INFORMATIKA NURUL BAYAN</li>
+                        <li><strong>Mata Pelajaran:</strong>ALGORITMA/INFORMATIKA</li>
+                        <li><strong>Guru:</strong> BAPAK ARIEF TAUFIQUROCHMAN S.T</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="components-grid">
+            <div class="component-card">
+                <div class="card-header">
+                    <h2>Motherboard</h2>
+                </div>
+                <div class="card-body">
+                    <p>Papan sirkuit utama yang menampung CPU (Central Processing Unit) dan komponen pemrosesan lainnya, berfungsi sebagai pusat penghubung semua komponen pemrosesan.</p>
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" 
+                         alt="Gambar Motherboard" class="component-img">
+                </div>
+            </div>
+            
+            <div class="component-card">
+                <div class="card-header">
+                    <h2>CPU (Central Processing Unit)</h2>
+                </div>
+                <div class="card-body">
+                    <p>Disebut "otak" komputer, memproses dan mengeksekusi perintah pengguna yang diberikan melalui program perangkat lunak, kecepatan CPU menentukan efisiensi komputer dalam memproses perintah.</p>
+                    <img src="https://files.catbox.moe/hv262d.jpg" 
+                         alt="Gambar CPU" class="component-img">
+                </div>
+            </div>
+            
+            <div class="component-card">
+                <div class="card-header">
+                    <h2>RAM (Random Access Memory)</h2>
+                </div>
+                <div class="card-body">
+                    <p>Perangkat penyimpanan data sementara, menyimpan data yang dapat langsung diakses oleh program perangkat lunak, data hilang ketika komputer dimatikan.</p>
+                    <img src="https://files.catbox.moe/c2bxih.jpg" 
+                         alt="Gambar RAM" class="component-img">
+                </div>
+            </div>
+            
+            <div class="component-card">
+                <div class="card-header">
+                    <h2>Hard Drive</h2>
+                </div>
+                <div class="card-body">
+                    <p>Perangkat penyimpanan data permanen, data tidak hilang ketika komputer dimatikan, digunakan untuk menyimpan sistem operasi, media, dan aplikasi.</p>
+                    <img src="https://files.catbox.moe/b5lo9q.jpg" 
+                         alt="Gambar Hard Drive" class="component-img">
+                </div>
+            </div>
+            
+            <div class="component-card">
+                <div class="card-header">
+                    <h2>GPU (Graphics Processing Unit)</h2>
+                </div>
+                <div class="card-body">
+                    <p>Memproses data grafis di komputer, tugas khusus tidak seperti CPU yang memproses semua data perintah.</p>
+                    <img src="https://files.catbox.moe/twfw9a.jpg" 
+                         alt="Gambar GPU" class="component-img">
+                </div>
+            </div>
+            
+            <div class="component-card">
+                <div class="card-header">
+                    <h2>Keyboard</h2>
+                </div>
+                <div class="card-body">
+                    <p>Hardware yang digunakan untuk mengetik atau memasukkan huruf, angka, atau simbol tertentu ke software atau sistem operasi yang dijalankan oleh komputer.</p>
+                    <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&q=80&w=800" 
+                         alt="Gambar Keyboard" class="component-img">
+                </div>
+            </div>
+            
+            <div class="component-card">
+                <div class="card-header">
+                    <h2>Mouse</h2>
+                </div>
+                <div class="card-body">
+                    <p>Constituent hardware yang termasuk dalam unit input, berfungsi untuk memasukkan data ke dalam komputer dan berbentuk seperti seekor tikus.</p>
+                    <img src="https://files.catbox.moe/fxhdkj.jpg" 
+                         alt="Gambar Mouse" class="component-img">
+                </div>
+            </div>
+            
+            <div class="component-card">
+                <div class="card-header">
+                    <h2>Monitor</h2>
+                </div>
+                <div class="card-body">
+                    <p>Komponen komputer yang digunakan sebagai tampilan yang menunjukkan hasil kerja sebuah komputer.</p>
+                    <img src="https://files.catbox.moe/396h0r.jpg" 
+                         alt="Gambar Monitor" class="component-img">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 2025 - NuBa | Sumber: Artikel Kompas.com dan Detik.com</p>
+            <p>BY:MifTamvan- SMA IT jln.sindangsari kec.cimerak  kab.pangandaran prov.jabar.</p>
+        </div>
+    </footer>
+    
+    <script>
+        function toggleAbout() {
+            const about = document.getElementById('about');
+            const button = document.querySelector('.toggle-btn');
+            
+            if (about.style.display === "block") {
+                about.style.display = "none";
+                button.textContent = "Lihat Tentang Mahasiswa";
+            } else {
+                about.style.display = "block";
+                button.textContent = "Sembunyikan Tentang Mahasiswa";
+                // Animasi scroll ke bagian about
+                about.scrollIntoView({behavior: 'smooth'});
+            }
+        }
+    </script>
+</body>
+</html>
